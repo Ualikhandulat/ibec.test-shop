@@ -35,6 +35,6 @@ class Product extends Model
 
     public function specifications (): BelongsToMany
     {
-        return $this->belongsToMany(Specification::class, 'products_specifications');
+        return $this->belongsToMany(Specification::class, 'products_specifications')->as('detail')->withPivot('value');
     }
 }

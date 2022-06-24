@@ -14,6 +14,7 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'price' => $this->price,
+            'specifications' => ProductSpecificationResource::collection($this->specifications),
             'catalog' => new CatalogResource($this->whenLoaded('catalog')),
         ];
     }

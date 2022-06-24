@@ -17,6 +17,11 @@ class ProductStoreRequest extends FormRequest
             'title' => 'required|string|max:255|unique:products',
             'description' => 'required|string|max:5000',
             'price' => 'required|numeric',
+
+            // характеристики
+            'specifications' => 'required|array|min:1',
+            'specifications.*.id' => 'required|integer|exists:specifications,id',
+            'specifications.*.value' => 'required|string|max:255',
         ];
     }
 

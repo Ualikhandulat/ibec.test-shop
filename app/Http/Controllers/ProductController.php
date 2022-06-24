@@ -23,6 +23,13 @@ class ProductController extends Controller
 
         $product = Product::query()->create($data);
 
+        $specifications = [];
+        foreach ($data['specifications'] as $spec) {
+            $specifications[$spec['id']] = ['value' => $spec['value']];
+        }
+
+        $product->specifications()->attach($specifications);
+
         return new ProductResource($product);
     }
 
