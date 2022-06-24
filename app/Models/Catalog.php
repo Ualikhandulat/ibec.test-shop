@@ -14,6 +14,7 @@ class Catalog extends Model
     protected $fillable = [
         'title',
         'parent_id',
+        'level',
     ];
 
     public function parent (): BelongsTo

@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->foreignId('parent_id')->constrained('catalogs');
+            $table->foreignId('parent_id')->nullable()->default(null)->constrained('catalogs');
+            $table->tinyInteger('level')->default(1);
             $table->timestamps();
         });
     }
