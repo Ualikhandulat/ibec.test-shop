@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Catalog::class)->constrained();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->longText('description');
             $table->float('price');
             $table->timestamps();

@@ -35,5 +35,4 @@ class CatalogController extends Controller
 
         return new CatalogResource($catalog);
     }
-
 }

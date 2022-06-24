@@ -23,7 +23,7 @@ class Product extends Model
         return Attribute::set(function ($title){
             return [
                 'title' => $title,
-                'slug' => Str::slug($title),
+                'slug' => date('YmdHis').'-'.Str::slug($title),
             ];
         });
     }
