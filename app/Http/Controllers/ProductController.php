@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Helpers\CatalogHelper;
 use App\Http\Requests\Product\ProductStoreRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Catalog;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index()
     {
+        $search = mb_substr(request()->get('search'), 0, 20);
+        $catalog = intval(request()->get('catalog'));
+
         $products = Product::query()
+            ->search($search)
+            ->catalog($catalog)
             ->paginate();
 
         return ProductResource::collection($products);

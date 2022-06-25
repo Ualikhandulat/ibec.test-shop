@@ -12,7 +12,7 @@ class CatalogController extends Controller
     {
         $catalogs = Catalog::query()
             ->whereNull('parent_id')
-            ->with('children')
+            ->with('children.children')
             ->get();
 
         return CatalogResource::collection($catalogs);

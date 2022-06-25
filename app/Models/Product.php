@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Helpers\CatalogHelper;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,21 @@ class Product extends Model
                 'title' => $title,
                 'slug' => date('YmdHis').'-'.Str::slug($title),
             ];
+        });
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        $query->when($search, function ($q, $s) {
+            $q->where("title", "regexp", $s)
+                ->orWhere("description", "regexp", $s);
+        });
+    }
+
+    public function scopeCatalog($query, $catalog)
+    {
+        $query->when($catalog, function ($q, $c) {
+            $q->whereIn("catalog_id", CatalogHelper::getIdsByParentId($c));
         });
     }
 
